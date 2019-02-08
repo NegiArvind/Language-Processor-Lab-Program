@@ -1,7 +1,7 @@
 variable={}
 order=[]
 variableStack=[]
-leading={}
+trailing={}
 with open("inputLeading.txt") as inputFile:
 	for production in inputFile:
 		st=production[0]
@@ -44,5 +44,5 @@ for i in range(len(order)):
 			is_YaZ_form(tempList,ch,variable[ch][j])
 		print("inside while",order[i],tempList)
 	print(order[i],tempList)
-	leading[order[i]]=tempList;
-print(leading)
+	trailing[order[i]]=tempList;
+print(trailing)
