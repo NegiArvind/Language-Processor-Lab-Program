@@ -13,7 +13,7 @@ with open("input_first_follow.txt") as inputFile:
 		if production.endswith('\n'):
 			rhsProduction=production[index+1:-1].split('|') #for removing '\n'
 		else:
-			rhsProduction=production[index+1:].split('|') #for removing '\n'
+			rhsProduction=production[index+1:].split('|')
 		print(rhsProduction)
 		variable[st]=rhsProduction
 print(variable)
