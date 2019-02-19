@@ -79,6 +79,20 @@ def find_first():
 
 	print("first ",first,"\n")
 
+def add_follow_or_first_or_handle_epsilon(lhs_varible,rhs_production,tempList,index):
+	if(index<len(rhs_production)):
+		# print("lhs_varible",rhs_production[index])
+		for element in first[rhs_production[index]]:
+			if element!='e':
+				# print("values",element)
+				tempList.append(element)
+			elif index==len(rhs_production)-1:
+				# print("index",index,follow[lhs_varible])
+				tempList=tempList+follow[lhs_varible]
+				# print("tempList",tempList)
+			else:
+				tempList=add_follow_or_first_or_handle_epsilon(lhs_varible,rhs_production,tempList,index+1)
+	return tempList
 
 def get_all_the_follow(value):
 	# print(value)
@@ -96,11 +110,16 @@ def get_all_the_follow(value):
 					# print("appended",tempList)
 				elif 65<=ord(rhs[index+1])<=90:
 					# print("murk")
-					for element in first[rhs[index+1]]:
-						if element!='e':
-							tempList.append(element)
-					if 'e' in first[rhs[index+1]]:
-						tempList=tempList+follow[ch]
+					# print("value lhs",value)
+					tempList=add_follow_or_first_or_handle_epsilon(ch,rhs,tempList,index+1)
+					# print("\nfinal tempList\n",tempList)
+					# for element in first[rhs[index+1]]:
+						# if element!='e':
+						# 	tempList.append(element)
+						# else:
+						# 	handle_epsilon(rhs,tempList,index+1)
+					# if 'e' in first[rhs[index+1]]:
+					# 	tempList=tempList+follow[ch]
 					# print("appended",tempList)
 				elif ord(rhs[index+1])<65 or ord(rhs[index+1])>=91:
 					tempList.append(rhs[index+1])
@@ -113,6 +132,7 @@ def find_follow():
 		follow[ch]=[]
 	for pair in enumerate(order):
 		value=pair[1]
+		# print("VAluesghvsuhg",value)
 		follow[value]=list(set(get_all_the_follow(value)))
 		if pair[0]==0:
 			follow[value].append('$')
