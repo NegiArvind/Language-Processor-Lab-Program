@@ -59,6 +59,10 @@ int main()
 				{
 					lex[k++]="abb";
 				}
+				else if(bcount==1)
+				{
+					lex[k++]="b";
+				}
 				else
 				{
 					// cout<<"Value of i b "<<i;
